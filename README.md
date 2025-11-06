@@ -64,19 +64,49 @@ A free, offline-capable document reader with AI analysis and text-to-speech. Wor
 - Click a bookmark to jump back to that section
 - Delete bookmarks you no longer need
 
-## 🎙️ Voice Features
+## 🎙️ Voice Features & TTS Providers
 
-### Standard Browser Voices (Free)
-- Works on all devices immediately
-- Multiple voice options
-- Adjustable speed and pitch
-- Pause/resume controls
+Choose from **5 different voice providers** - all with FREE tiers!
 
-### Premium AI Voices (Optional)
-- Get ultra-realistic voices with [ElevenLabs](https://elevenlabs.io/)
-- Free tier: 10,000 characters/month
-- Enter your API key in the app
-- Fallback to browser voices if unavailable
+### 🔊 Browser Voices (Default - 100% Free)
+- ✅ Works immediately, no setup
+- ✅ Multiple voices available
+- ✅ Adjustable speed, pitch, and volume
+- ✅ Works completely offline
+- ⚠️ Quality varies by device
+
+### 🔵 Google Cloud Text-to-Speech
+- ✅ **FREE: 1-4 million characters/month!**
+- ✅ Premium: $4 per 1M characters
+- ✅ WaveNet & Neural2 ultra-realistic voices
+- ✅ 220+ voices in 40+ languages
+- 📚 Sign up: [Google Cloud Console](https://cloud.google.com/text-to-speech)
+
+### 🔷 Microsoft Azure Speech
+- ✅ **FREE: 500,000 characters/month**
+- ✅ Premium: $15 per 1M characters
+- ✅ Neural voices with emotions
+- ✅ 400+ voices in 140+ languages
+- ✅ Custom voice training available (paid)
+- 📚 Sign up: [Azure Portal](https://azure.microsoft.com/services/cognitive-services/text-to-speech/)
+
+### 🎭 Play.ht
+- ✅ **FREE: 12,500 characters trial**
+- ✅ Personal: $19/month (100k words)
+- ✅ Professional: $39/month (500k words)
+- 🎤 **Voice Cloning: $59/month+**
+- ✅ Ultra-realistic AI voices
+- ✅ 800+ voices in 60+ languages
+- 📚 Sign up: [Play.ht](https://play.ht/)
+
+### 🎤 Resemble.ai (BEST for Voice Cloning!)
+- ✅ **FREE: Basic plan available**
+- ✅ Pro: ~$20/month
+- 🎤 **Voice Cloning INCLUDED in FREE tier!**
+- ✅ Clone your voice with just 25 sentences
+- ✅ Real-time voice synthesis
+- ✅ Emotion control
+- 📚 Sign up: [Resemble.ai](https://www.resemble.ai/)
 
 ## 🎯 Perfect For
 
@@ -87,17 +117,24 @@ A free, offline-capable document reader with AI analysis and text-to-speech. Wor
 - 🚗 Listening while driving
 - 🏃 Listening while exercising
 
-## 🆓 Everything is FREE!
+## 🆓 What's FREE
 
-- ✅ All navigation features
-- ✅ Document upload and processing
-- ✅ Text-to-speech (browser voices)
+### Core Features (Always Free)
+- ✅ All navigation features (skip, jump, bookmarks)
+- ✅ Document upload and processing (PDF, TXT, DOCX)
+- ✅ Text-to-speech with browser voices
+- ✅ Modern voice controls (speed, pitch, volume)
 - ✅ Bookmarks and progress tracking
-- ✅ Dark mode
-- ✅ Offline functionality
+- ✅ Dark mode & responsive design
+- ✅ Offline functionality (PWA)
 - ✅ No accounts or sign-ups required
 
-**Optional Premium**: ElevenLabs for better voice quality (10k chars/month free)
+### Voice Providers with Generous FREE Tiers
+- 🔊 **Browser Voices**: Unlimited, forever free
+- 🔵 **Google Cloud TTS**: 1-4M characters/month FREE
+- 🔷 **Azure Speech**: 500k characters/month FREE
+- 🎭 **Play.ht**: 12.5k characters trial FREE
+- 🎤 **Resemble.ai**: Basic plan FREE with voice cloning!
 
 ## 🔒 Privacy
 
@@ -106,13 +143,42 @@ A free, offline-capable document reader with AI analysis and text-to-speech. Wor
 - No tracking or analytics
 - Bookmarks saved locally in your browser
 
+## 🎤 Voice Cloning - Hear Yourself Reading!
+
+Want the app to read documents in **YOUR own voice**? Here's how:
+
+### Option 1: Resemble.ai (RECOMMENDED - FREE!)
+1. **Sign up** for free at [Resemble.ai](https://www.resemble.ai/)
+2. **Record your voice**: Read 25 sentences (takes ~10 minutes)
+3. **Get your API key** from the dashboard
+4. **Enter it in the app** under "Resemble.ai" tab
+5. **Done!** The app now reads in YOUR voice
+
+### Option 2: Play.ht (Premium)
+1. **Sign up** at [Play.ht](https://play.ht/)
+2. **Upgrade** to Creator plan ($59/month)
+3. **Upload voice samples** (1-2 minutes of audio)
+4. **Get API key** and voice ID
+5. **Configure** in the app
+
+### Option 3: Azure Custom Neural Voice (Enterprise)
+1. **Sign up** for Azure Speech Service
+2. **Apply** for Custom Neural Voice access
+3. **Record training data** (professional recording needed)
+4. **Train model** (can take hours)
+5. **Use in app** with your custom voice ID
+
+**Best for personal use**: Resemble.ai offers FREE voice cloning!
+
 ## 💡 Tips
 
 1. **For long documents**: Use the section dropdown to navigate quickly
 2. **Save your place**: Bookmark before closing the app
 3. **Adjust reading speed**: Use the speed slider for comfortable listening
-4. **Dark mode**: Toggle for night reading
-5. **Install the app**: Works offline and loads faster
+4. **Volume control**: Adjust volume without leaving the app
+5. **Dark mode**: Toggle for night reading
+6. **Install the app**: Works offline and loads faster
+7. **Voice cloning**: Try Resemble.ai for free to hear yourself!
 
 ## 🛠️ Technical Details
 
