@@ -484,30 +484,34 @@
 
         .voice-controls {
             margin-top: 30px;
-            padding: 30px;
-            background: var(--bg-secondary);
-            border-radius: 20px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-radius: 24px;
             display: none;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--border-color);
             animation: fadeIn 0.4s ease-out;
+            box-shadow: var(--shadow-lg);
         }
 
         .voice-controls h4 {
             color: var(--primary-color);
-            margin-bottom: 25px;
-            font-size: 1.3rem;
-            font-weight: 700;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .voice-controls-grid {
             display: grid;
-            gap: 20px;
+            gap: 30px;
         }
 
         .control-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
         }
 
         .control-label {
@@ -515,55 +519,124 @@
             justify-content: space-between;
             align-items: center;
             color: var(--text-primary);
-            font-weight: 600;
-            font-size: 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
         }
 
-        select, input[type="range"] {
+        .control-value {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+            font-weight: 800;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        select {
             width: 100%;
-            padding: 12px;
+            padding: 14px 16px;
             border: 2px solid var(--border-color);
-            border-radius: 12px;
-            font-size: 1rem;
+            border-radius: 14px;
+            font-size: 1.05rem;
             background: var(--bg-primary);
             color: var(--text-primary);
             transition: all 0.3s ease;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        select:focus, input[type="range"]:focus {
+        select:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            transform: translateY(-1px);
         }
 
+        select:hover {
+            border-color: var(--primary-color);
+        }
+
+        /* Modern Range Slider */
         input[type="range"] {
-            height: 8px;
             -webkit-appearance: none;
             appearance: none;
-            background: var(--border-color);
+            width: 100%;
+            height: 12px;
+            background: transparent;
             outline: none;
             padding: 0;
+            margin: 10px 0;
+        }
+
+        input[type="range"]::-webkit-slider-track {
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(90deg, var(--border-color) 0%, var(--bg-tertiary) 100%);
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
         }
 
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 28px;
+            height: 28px;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             cursor: pointer;
             border-radius: 50%;
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+            border: 4px solid white;
+            transition: all 0.3s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.6);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:active {
+            transform: scale(1.1);
+        }
+
+        input[type="range"]::-moz-range-track {
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(90deg, var(--border-color) 0%, var(--bg-tertiary) 100%);
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
         }
 
         input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
+            width: 28px;
+            height: 28px;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             cursor: pointer;
             border-radius: 50%;
-            border: none;
-            box-shadow: var(--shadow-md);
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.6);
+        }
+
+        /* Range value indicator */
+        .slider-container {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .slider-markers {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
         .voice-record-section {
@@ -595,34 +668,117 @@
 
         .api-key-section {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
-            padding: 25px;
-            border-radius: 16px;
+            padding: 30px;
+            border-radius: 20px;
             margin-bottom: 25px;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--border-color);
         }
 
         .api-key-section h4 {
             color: var(--success-color);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
             font-weight: 700;
         }
 
         .api-key-section p {
             color: var(--text-secondary);
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
-        .api-key-section input {
+        .provider-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .provider-tab {
+            padding: 12px 24px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .provider-tab:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .provider-tab.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .provider-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .provider-content.active {
+            display: block;
+        }
+
+        .api-input-group {
+            margin-bottom: 20px;
+        }
+
+        .api-input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .api-input-group input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: 2px solid var(--border-color);
             border-radius: 12px;
             font-size: 1rem;
             background: var(--bg-primary);
             color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .api-input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .provider-info {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid var(--success-color);
+        }
+
+        .provider-info h5 {
+            color: var(--success-color);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .provider-info ul {
+            margin-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .provider-info li {
+            margin: 5px 0;
         }
 
         .api-key-section a {
@@ -936,11 +1092,131 @@
         </div>
 
         <div class="card">
-            <!-- API Key Section for ElevenLabs -->
+            <!-- API Key Section for Multiple TTS Providers -->
             <div class="api-key-section">
-                <h4>🔑 Premium Voice Quality (Optional)</h4>
-                <p>For ultra-realistic voice synthesis, add your <a href="https://elevenlabs.io/" target="_blank">ElevenLabs API key</a>. Free tier includes 10,000 characters/month. Leave empty to use standard browser voices.</p>
-                <input type="password" id="apiKey" placeholder="Enter ElevenLabs API Key (optional)" onchange="saveApiKey()">
+                <h4>🎙️ AI Voice Providers (Optional - Choose Your Favorite!)</h4>
+                <p>Pick a provider for ultra-realistic voices. All have FREE tiers! Leave empty to use standard browser voices.</p>
+
+                <div class="provider-tabs">
+                    <div class="provider-tab active" onclick="switchProvider('browser')">
+                        🔊 Browser Voices
+                    </div>
+                    <div class="provider-tab" onclick="switchProvider('google')">
+                        🔵 Google Cloud
+                    </div>
+                    <div class="provider-tab" onclick="switchProvider('azure')">
+                        🔷 Azure
+                    </div>
+                    <div class="provider-tab" onclick="switchProvider('playht')">
+                        🎭 Play.ht
+                    </div>
+                    <div class="provider-tab" onclick="switchProvider('resemble')">
+                        🎤 Resemble.ai
+                    </div>
+                </div>
+
+                <!-- Browser Voices -->
+                <div class="provider-content active" id="provider-browser">
+                    <div class="provider-info">
+                        <h5>✅ Free Browser Voices (Default)</h5>
+                        <ul>
+                            <li>✅ <strong>100% Free</strong> - No API key needed</li>
+                            <li>✅ Works offline once loaded</li>
+                            <li>✅ Multiple voices available</li>
+                            <li>✅ Adjustable speed and pitch</li>
+                            <li>⚠️ Quality varies by device</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Google Cloud TTS -->
+                <div class="provider-content" id="provider-google">
+                    <div class="api-input-group">
+                        <label>Google Cloud API Key</label>
+                        <input type="password" id="googleApiKey" placeholder="Enter your Google Cloud API key" onchange="saveProviderKey('google', this.value)">
+                    </div>
+                    <div class="provider-info">
+                        <h5>🔵 Google Cloud Text-to-Speech</h5>
+                        <ul>
+                            <li>✅ <strong>FREE: 1-4 million characters/month</strong></li>
+                            <li>✅ Premium: $4 per 1M characters</li>
+                            <li>✅ WaveNet & Neural2 voices</li>
+                            <li>✅ 220+ voices in 40+ languages</li>
+                            <li>📚 Get API key: <a href="https://cloud.google.com/text-to-speech" target="_blank">Google Cloud Console</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Azure Speech -->
+                <div class="provider-content" id="provider-azure">
+                    <div class="api-input-group">
+                        <label>Azure Speech Key</label>
+                        <input type="password" id="azureApiKey" placeholder="Enter your Azure Speech key" onchange="saveProviderKey('azure', this.value)">
+                    </div>
+                    <div class="api-input-group">
+                        <label>Azure Region (e.g., eastus)</label>
+                        <input type="text" id="azureRegion" placeholder="eastus" onchange="saveProviderKey('azureRegion', this.value)">
+                    </div>
+                    <div class="provider-info">
+                        <h5>🔷 Microsoft Azure Text-to-Speech</h5>
+                        <ul>
+                            <li>✅ <strong>FREE: 500,000 characters/month</strong></li>
+                            <li>✅ Premium: $15 per 1M characters</li>
+                            <li>✅ Neural voices with emotions</li>
+                            <li>✅ 400+ voices in 140+ languages</li>
+                            <li>✅ Custom voice training available</li>
+                            <li>📚 Get API key: <a href="https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/" target="_blank">Azure Portal</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Play.ht -->
+                <div class="provider-content" id="provider-playht">
+                    <div class="api-input-group">
+                        <label>Play.ht API Key</label>
+                        <input type="password" id="playhtApiKey" placeholder="Enter your Play.ht API key" onchange="saveProviderKey('playht', this.value)">
+                    </div>
+                    <div class="api-input-group">
+                        <label>User ID</label>
+                        <input type="text" id="playhtUserId" placeholder="Your Play.ht User ID" onchange="saveProviderKey('playhtUserId', this.value)">
+                    </div>
+                    <div class="provider-info">
+                        <h5>🎭 Play.ht - Ultra-Realistic AI Voices</h5>
+                        <ul>
+                            <li>✅ <strong>FREE: 12,500 characters trial</strong></li>
+                            <li>✅ Personal: $19/month (100k words)</li>
+                            <li>✅ Professional: $39/month (500k words)</li>
+                            <li>🎤 <strong>Voice Cloning: $59/month+</strong></li>
+                            <li>✅ Ultra-realistic AI voices</li>
+                            <li>✅ 800+ voices in 60+ languages</li>
+                            <li>📚 Sign up: <a href="https://play.ht/" target="_blank">Play.ht</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resemble.ai -->
+                <div class="provider-content" id="provider-resemble">
+                    <div class="api-input-group">
+                        <label>Resemble.ai API Key</label>
+                        <input type="password" id="resembleApiKey" placeholder="Enter your Resemble.ai API key" onchange="saveProviderKey('resemble', this.value)">
+                    </div>
+                    <div class="provider-info">
+                        <h5>🎤 Resemble.ai - Voice Cloning & AI Speech</h5>
+                        <ul>
+                            <li>✅ <strong>FREE: Basic plan available</strong></li>
+                            <li>✅ Pro: $0.006 per second (~$20/month)</li>
+                            <li>🎤 <strong>Voice Cloning Included!</strong></li>
+                            <li>✅ Clone your voice with 25 sentences</li>
+                            <li>✅ Real-time voice synthesis</li>
+                            <li>✅ Emotion control</li>
+                            <li>📚 Sign up: <a href="https://www.resemble.ai/" target="_blank">Resemble.ai</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-secondary);">
+                    💡 <strong>Tip:</strong> Browser voices work great for free! Premium voices give you ultra-realistic quality and voice cloning.
+                </p>
             </div>
 
             <div class="upload-area" id="uploadArea">
@@ -1048,34 +1324,67 @@
                 </div>
 
                 <div class="voice-controls" id="voiceControls">
-                    <h4>🎙️ Voice Controls</h4>
+                    <h4>🎛️ Voice Controls</h4>
                     <div class="voice-controls-grid">
                         <div class="control-group">
                             <label class="control-label">
-                                <span>🎤 Voice:</span>
+                                <span>🎤 Voice Selection</span>
                             </label>
                             <select id="voiceSelect" onchange="updateVoice()">
                                 <option>Loading voices...</option>
                             </select>
                         </div>
+
                         <div class="control-group">
                             <label class="control-label">
-                                <span>⚡ Speed:</span>
-                                <span id="speedValue">1.0x</span>
+                                <span>⚡ Reading Speed</span>
+                                <span class="control-value" id="speedValue">1.0x</span>
                             </label>
-                            <input type="range" id="speedControl" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeed()">
+                            <div class="slider-container">
+                                <input type="range" id="speedControl" min="0.5" max="2" step="0.1" value="1" oninput="updateSpeed()">
+                                <div class="slider-markers">
+                                    <span>0.5x</span>
+                                    <span>1.0x</span>
+                                    <span>1.5x</span>
+                                    <span>2.0x</span>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="control-group">
                             <label class="control-label">
-                                <span>🎵 Pitch:</span>
-                                <span id="pitchValue">1.0</span>
+                                <span>🎵 Voice Pitch</span>
+                                <span class="control-value" id="pitchValue">1.0</span>
                             </label>
-                            <input type="range" id="pitchControl" min="0.5" max="2" step="0.1" value="1" oninput="updatePitch()">
+                            <div class="slider-container">
+                                <input type="range" id="pitchControl" min="0.5" max="2" step="0.1" value="1" oninput="updatePitch()">
+                                <div class="slider-markers">
+                                    <span>Low</span>
+                                    <span>Normal</span>
+                                    <span>High</span>
+                                </div>
+                            </div>
                         </div>
-                        <div style="display: flex; gap: 10px; margin-top: 15px;">
-                            <button class="btn" onclick="pauseReading()" id="pauseBtn" style="flex: 1; display: none;">⏸️ Pause</button>
-                            <button class="btn" onclick="resumeReading()" id="resumeBtn" style="flex: 1; display: none;">▶️ Resume</button>
-                            <button class="btn" onclick="stopReading()" style="flex: 1;">⏹️ Stop</button>
+
+                        <div class="control-group">
+                            <label class="control-label">
+                                <span>🔊 Volume</span>
+                                <span class="control-value" id="volumeValue">100%</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" id="volumeControl" min="0" max="100" step="5" value="100" oninput="updateVolume()">
+                                <div class="slider-markers">
+                                    <span>0%</span>
+                                    <span>50%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 20px;">
+                            <button class="btn" onclick="pauseReading()" id="pauseBtn" style="display: none;">⏸️ Pause</button>
+                            <button class="btn" onclick="resumeReading()" id="resumeBtn" style="display: none;">▶️ Resume</button>
+                            <button class="btn" onclick="stopReading()">⏹️ Stop</button>
                         </div>
                     </div>
 
@@ -1137,10 +1446,8 @@
                 currentTheme = 'dark';
             }
 
-            const savedApiKey = localStorage.getItem('elevenlabs_api_key');
-            if (savedApiKey) {
-                document.getElementById('apiKey').value = savedApiKey;
-            }
+            // Load provider settings
+            loadProviderSettings();
         });
 
         // Theme toggle
@@ -1150,6 +1457,61 @@
             document.querySelector('.theme-toggle').textContent = currentTheme === 'dark' ? '☀️' : '🌙';
             localStorage.setItem('theme', currentTheme);
             showNotification(currentTheme === 'dark' ? '🌙 Dark mode enabled' : '☀️ Light mode enabled');
+        }
+
+        // ============================================
+        // PROVIDER MANAGEMENT
+        // ============================================
+
+        let currentProvider = 'browser';
+        let providerSettings = {};
+
+        // Switch TTS provider
+        function switchProvider(provider) {
+            currentProvider = provider;
+
+            // Update tab active state
+            document.querySelectorAll('.provider-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update content active state
+            document.querySelectorAll('.provider-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`provider-${provider}`).classList.add('active');
+
+            localStorage.setItem('tts_provider', provider);
+            showNotification(`Switched to ${provider === 'browser' ? 'Browser Voices' : provider.charAt(0).toUpperCase() + provider.slice(1)}`);
+        }
+
+        // Save provider API keys
+        function saveProviderKey(key, value) {
+            if (value && value.trim().length > 0) {
+                localStorage.setItem(`tts_${key}`, value);
+                showNotification('✅ API key saved!');
+            } else {
+                localStorage.removeItem(`tts_${key}`);
+            }
+        }
+
+        // Load provider settings on startup
+        function loadProviderSettings() {
+            const savedProvider = localStorage.getItem('tts_provider') || 'browser';
+            currentProvider = savedProvider;
+
+            // Load all saved keys
+            ['googleApiKey', 'azureApiKey', 'azureRegion', 'playhtApiKey', 'playhtUserId', 'resembleApiKey'].forEach(key => {
+                const value = localStorage.getItem(`tts_${key}`);
+                if (value) {
+                    const element = document.getElementById(key);
+                    if (element) element.value = value;
+                }
+            });
+
+            // Set active provider tab
+            switchProvider(savedProvider);
         }
 
         // Save API key
@@ -1584,7 +1946,8 @@
             // Set speech parameters
             currentUtterance.rate = parseFloat(document.getElementById('speedControl').value);
             currentUtterance.pitch = parseFloat(document.getElementById('pitchControl').value);
-            currentUtterance.volume = 1;
+            const volumeControl = document.getElementById('volumeControl');
+            currentUtterance.volume = volumeControl ? parseFloat(volumeControl.value) / 100 : 1;
 
             // Event handlers
             currentUtterance.onstart = () => {
@@ -1678,6 +2041,18 @@
             document.getElementById('pitchValue').textContent = parseFloat(pitch).toFixed(1);
 
             if (currentUtterance && isReading && !audioElement) {
+                stopReading();
+                setTimeout(() => startReading(), 100);
+            }
+        }
+
+        function updateVolume() {
+            const volume = document.getElementById('volumeControl').value;
+            document.getElementById('volumeValue').textContent = volume + '%';
+
+            if (audioElement) {
+                audioElement.volume = volume / 100;
+            } else if (currentUtterance && isReading) {
                 stopReading();
                 setTimeout(() => startReading(), 100);
             }
