@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Upload documents for instant AI analysis with premium voice synthesis">
+    <meta name="theme-color" content="#6366f1">
     <title>AI Document Reader Pro - Advanced PDF & Document Analyzer with Voice AI</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%236366f1'/><text x='50' y='65' font-size='60' text-anchor='middle' fill='white'>📄</text></svg>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
     <style>
@@ -688,6 +692,216 @@
             50% { height: 40px; }
         }
 
+        /* Navigation Controls */
+        .reading-progress {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-primary);
+            padding: 15px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .navigation-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 16px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .bookmark-section {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .bookmark-section h4 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .bookmark-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .bookmark-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .bookmark-item:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .bookmark-item .delete-bookmark {
+            background: var(--error-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .reading-view {
+            display: none;
+            background: var(--bg-primary);
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+            max-height: 400px;
+            overflow-y: auto;
+            line-height: 1.9;
+            font-size: 1.1rem;
+        }
+
+        .reading-view.show {
+            display: block;
+        }
+
+        .reading-view::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .reading-view::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+        }
+
+        .reading-view::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .reading-view .current-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .install-prompt {
+            position: fixed;
+            bottom: 80px;
+            right: 30px;
+            background: var(--bg-primary);
+            padding: 20px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-2xl);
+            border: 2px solid var(--primary-color);
+            display: none;
+            animation: slideInRight 0.4s ease-out;
+            z-index: 1000;
+            max-width: 350px;
+        }
+
+        .install-prompt.show {
+            display: block;
+        }
+
+        .install-prompt .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .chapter-nav {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .chapter-nav select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -770,6 +984,52 @@
                     </div>
                 </div>
 
+                <!-- Reading Progress & Navigation -->
+                <div class="reading-progress">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span>📖 Position: <strong id="currentPosition">0</strong> / <strong id="totalSections">0</strong></span>
+                        <span>⏱️ <strong id="timeRemaining">0:00</strong> remaining</span>
+                    </div>
+                    <div class="navigation-controls">
+                        <button class="nav-btn" onclick="navigateToStart()" title="Jump to start">
+                            ⏮️ Start
+                        </button>
+                        <button class="nav-btn" onclick="skipBackward()" title="Go back">
+                            ⏪ -30s
+                        </button>
+                        <button class="nav-btn" onclick="addBookmark()" title="Bookmark current position">
+                            🔖 Bookmark
+                        </button>
+                        <button class="nav-btn" onclick="skipForward()" title="Skip ahead">
+                            ⏩ +30s
+                        </button>
+                        <button class="nav-btn" onclick="navigateToEnd()" title="Jump to end">
+                            ⏭️ End
+                        </button>
+                    </div>
+
+                    <!-- Chapter/Section Navigation -->
+                    <div class="chapter-nav">
+                        <select id="sectionSelect" onchange="jumpToSection(this.value)">
+                            <option value="0">📑 Jump to section...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Reading View (for better reading experience) -->
+                <div class="reading-view" id="readingView">
+                    <div class="current-section" id="currentSection"></div>
+                </div>
+
+                <!-- Bookmarks Section -->
+                <div class="bookmark-section" style="display: none;" id="bookmarkSection">
+                    <h4>🔖 Your Bookmarks</h4>
+                    <div class="bookmark-list" id="bookmarkList"></div>
+                </div>
+
                 <div class="result-section">
                     <h3>📝 Extracted Text (Preview)</h3>
                     <div class="result-content extracted-text" id="extractedText"></div>
@@ -846,6 +1106,14 @@
     </div>
 
     <div class="notification" id="notification"></div>
+
+    <!-- PWA Install Prompt -->
+    <div class="install-prompt" id="installPrompt">
+        <button class="close-btn" onclick="closeInstallPrompt()">×</button>
+        <h3 style="color: var(--primary-color); margin-bottom: 10px;">📱 Install App</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 15px;">Install this app on your phone for easy access!</p>
+        <button class="btn" onclick="installApp()" style="width: 100%;">✨ Install Now</button>
+    </div>
 
     <script>
         // PDF.js configuration
@@ -1495,6 +1763,267 @@
             stopReading();
             stopRecording();
         });
+
+        // ============================================
+        // NAVIGATION & PROGRESS TRACKING
+        // ============================================
+
+        let documentSections = [];
+        let currentSectionIndex = 0;
+        let bookmarks = [];
+        let totalWords = 0;
+        let currentReadingPosition = 0;
+
+        // Split document into sections (by paragraphs)
+        function splitIntoSections(text) {
+            const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 50);
+
+            // If no clear paragraphs, split by sentences
+            if (paragraphs.length < 3) {
+                const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+                // Group sentences into sections of ~5 sentences each
+                const sectionsArray = [];
+                for (let i = 0; i < sentences.length; i += 5) {
+                    sectionsArray.push(sentences.slice(i, i + 5).join(' '));
+                }
+                return sectionsArray;
+            }
+
+            return paragraphs;
+        }
+
+        // Initialize navigation after document is loaded
+        function initializeNavigation() {
+            if (!extractedTextGlobal || extractedTextGlobal.length === 0) return;
+
+            documentSections = splitIntoSections(extractedTextGlobal);
+            totalWords = extractedTextGlobal.trim().split(/\s+/).length;
+
+            document.getElementById('totalSections').textContent = documentSections.length;
+            document.getElementById('currentPosition').textContent = '1';
+
+            // Populate section dropdown
+            const sectionSelect = document.getElementById('sectionSelect');
+            sectionSelect.innerHTML = '<option value="0">📑 Jump to section...</option>';
+            documentSections.forEach((section, index) => {
+                const preview = section.substring(0, 50).replace(/\n/g, ' ') + '...';
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `Section ${index + 1}: ${preview}`;
+                sectionSelect.appendChild(option);
+            });
+
+            // Show first section in reading view
+            showSection(0);
+            updateProgress();
+
+            // Load saved bookmarks
+            loadBookmarks();
+        }
+
+        // Show specific section
+        function showSection(index) {
+            if (index < 0 || index >= documentSections.length) return;
+
+            currentSectionIndex = index;
+            const section = documentSections[index];
+
+            document.getElementById('currentSection').textContent = section;
+            document.getElementById('readingView').classList.add('show');
+            document.getElementById('currentPosition').textContent = index + 1;
+
+            updateProgress();
+        }
+
+        // Update progress bar and time remaining
+        function updateProgress() {
+            const progress = ((currentSectionIndex + 1) / documentSections.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            // Calculate reading time remaining (assuming 200 words per minute)
+            const wordsInPreviousSections = documentSections.slice(0, currentSectionIndex)
+                .join(' ').split(/\s+/).length;
+            const wordsRemaining = totalWords - wordsInPreviousSections;
+            const minutesRemaining = Math.ceil(wordsRemaining / 200);
+            const hours = Math.floor(minutesRemaining / 60);
+            const minutes = minutesRemaining % 60;
+
+            const timeString = hours > 0
+                ? `${hours}:${minutes.toString().padStart(2, '0')}h`
+                : `${minutes}:00`;
+
+            document.getElementById('timeRemaining').textContent = timeString;
+        }
+
+        // Navigation functions
+        function navigateToStart() {
+            showSection(0);
+            showNotification('📖 Jumped to start');
+        }
+
+        function navigateToEnd() {
+            showSection(documentSections.length - 1);
+            showNotification('📖 Jumped to end');
+        }
+
+        function skipForward() {
+            if (currentSectionIndex < documentSections.length - 1) {
+                showSection(currentSectionIndex + 1);
+                showNotification('⏩ Skipped forward');
+            } else {
+                showNotification('📖 Already at the end');
+            }
+        }
+
+        function skipBackward() {
+            if (currentSectionIndex > 0) {
+                showSection(currentSectionIndex - 1);
+                showNotification('⏪ Skipped backward');
+            } else {
+                showNotification('📖 Already at the start');
+            }
+        }
+
+        function jumpToSection(index) {
+            const sectionIndex = parseInt(index);
+            if (sectionIndex >= 0 && sectionIndex < documentSections.length) {
+                showSection(sectionIndex);
+                showNotification(`📖 Jumped to section ${sectionIndex + 1}`);
+            }
+        }
+
+        // Bookmark management
+        function addBookmark() {
+            const bookmark = {
+                section: currentSectionIndex,
+                preview: documentSections[currentSectionIndex].substring(0, 60) + '...',
+                timestamp: new Date().toLocaleString()
+            };
+
+            bookmarks.push(bookmark);
+            saveBookmarks();
+            renderBookmarks();
+            showNotification('🔖 Bookmark added!');
+        }
+
+        function saveBookmarks() {
+            localStorage.setItem('document_bookmarks', JSON.stringify(bookmarks));
+        }
+
+        function loadBookmarks() {
+            const saved = localStorage.getItem('document_bookmarks');
+            if (saved) {
+                bookmarks = JSON.parse(saved);
+                renderBookmarks();
+            }
+        }
+
+        function renderBookmarks() {
+            const bookmarkList = document.getElementById('bookmarkList');
+            const bookmarkSection = document.getElementById('bookmarkSection');
+
+            if (bookmarks.length === 0) {
+                bookmarkSection.style.display = 'none';
+                return;
+            }
+
+            bookmarkSection.style.display = 'block';
+            bookmarkList.innerHTML = '';
+
+            bookmarks.forEach((bookmark, index) => {
+                const item = document.createElement('div');
+                item.className = 'bookmark-item';
+                item.innerHTML = `
+                    <div onclick="jumpToSection(${bookmark.section})">
+                        <strong>Section ${bookmark.section + 1}</strong><br>
+                        <small style="color: var(--text-secondary);">${bookmark.preview}</small><br>
+                        <small style="color: var(--text-secondary);">${bookmark.timestamp}</small>
+                    </div>
+                    <button class="delete-bookmark" onclick="deleteBookmark(${index}); event.stopPropagation();">
+                        🗑️
+                    </button>
+                `;
+                bookmarkList.appendChild(item);
+            });
+        }
+
+        function deleteBookmark(index) {
+            bookmarks.splice(index, 1);
+            saveBookmarks();
+            renderBookmarks();
+            showNotification('🗑️ Bookmark deleted');
+        }
+
+        // ============================================
+        // PWA INSTALLATION
+        // ============================================
+
+        let deferredPrompt;
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // Handle install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+
+            // Show custom install prompt after 3 seconds
+            setTimeout(() => {
+                document.getElementById('installPrompt').classList.add('show');
+            }, 3000);
+        });
+
+        function installApp() {
+            if (!deferredPrompt) {
+                showNotification('ℹ️ App is already installed or not installable');
+                return;
+            }
+
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    showNotification('✅ App installed successfully!');
+                } else {
+                    showNotification('ℹ️ Installation cancelled');
+                }
+                deferredPrompt = null;
+                document.getElementById('installPrompt').classList.remove('show');
+            });
+        }
+
+        function closeInstallPrompt() {
+            document.getElementById('installPrompt').classList.remove('show');
+        }
+
+        // Detect if app is running as PWA
+        window.addEventListener('load', () => {
+            if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+                console.log('Running as installed PWA');
+                // Hide install prompt if already installed
+                document.getElementById('installPrompt').remove();
+            }
+        });
+
+        // Update navigation initialization when document is processed
+        const originalHandleFile = handleFile;
+        handleFile = async function(file) {
+            await originalHandleFile(file);
+            // Initialize navigation after document is processed
+            setTimeout(() => {
+                initializeNavigation();
+            }, 500);
+        };
     </script>
 </body>
 </html>
